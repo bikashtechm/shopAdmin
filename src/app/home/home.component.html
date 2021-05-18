@@ -2,8 +2,10 @@
   <h3>All Courses</h3>
   <mat-tab-group>
     <mat-tab label="Beginners">
-      <courses-card-list></courses-card-list>
+      <courses-card-list [courses]="beginnerCourses"></courses-card-list>
     </mat-tab>
-    <mat-tab label="Advances"> </mat-tab>
+    <mat-tab label="Advances">
+      <courses-card-list [courses]="advancedCourses"></courses-card-list>
+    </mat-tab>
   </mat-tab-group>
 </div>

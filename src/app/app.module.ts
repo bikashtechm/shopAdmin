@@ -1,4 +1,8 @@
-import { NgModule } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +23,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AboutComponent, TopMenuComponent, CoursesCardListComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AboutComponent,
+    TopMenuComponent,
+    CoursesCardListComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -33,6 +43,7 @@ import { CoursesCardListComponent } from './courses-card-list/courses-card-list.
     MatListModule,
     MatToolbarModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
 })
