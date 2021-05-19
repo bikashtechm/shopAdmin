@@ -1,28 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { Course } from '../model/course';
-import { COURSES } from '../model/db-data';
+import {Component, OnInit} from '@angular/core';
+import {Course} from "../model/course";
+import {Observable} from "rxjs";
+import {CoursesService} from "../services/courses.service";
+import {map} from "rxjs/operators";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  beginnerCourses: Course[] = [];
 
-  advancedCourses: Course[] = [];
+    beginnerCourses$: Observable<Course[]>;
 
-  constructor() {}
+    advancedCourses$: Observable<Course[]>;
 
-  ngOnInit() {
-    const courses: any = Object.values(COURSES);
+    constructor(private coursesService: CoursesService) {
 
-    this.beginnerCourses = courses.filter(
-      (course: any) => course.category === 'BEGINNER'
-    );
+    }
 
-    this.advancedCourses = courses.filter(
-      (course: any) => course.category === 'ADVANCED'
-    );
-  }
+    ngOnInit() {
+
+        const courses$ = this.coursesService.findAllCourses();
+
+        this.beginnerCourses$ = courses$.pipe(
+          map(courses => courses.filter(course => course.category === 'BEGINNER') )
+        );
+
+        this.advancedCourses$ = courses$.pipe(
+            map(courses => courses.filter(course => course.category === 'ADVANCED') )
+        );
+
+    }
+
 }
